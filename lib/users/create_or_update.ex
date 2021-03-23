@@ -8,12 +8,10 @@ defmodule Flightex.Users.CreateOrUpdate do
     |> save_user()
   end
 
-  defp save_user({:ok, %User{} = user}) do
-    uuid = UUID.uuid4()
+  defp save_user({:ok, %User{cpf: cpf} = user}) do
+    UserAgent.save(user)
 
-    UserAgent.save(user, uuid)
-
-    {:ok, uuid}
+    {:ok, "User with cpf #{cpf} created or updated successfully"}
   end
 
   defp save_user({:error, _reason} = error), do: error
