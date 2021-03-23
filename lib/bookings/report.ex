@@ -20,7 +20,6 @@ defmodule Flightex.Bookings.Report do
          cidade_destino: cidade_destino,
          data_completa: data_completa
        }) do
-    data_completa = NaiveDateTime.to_string(data_completa)
     "#{id_usuario},#{cidade_origem},#{cidade_destino},#{data_completa}\n"
   end
 end
