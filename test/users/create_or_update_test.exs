@@ -20,9 +20,7 @@ defmodule Flightex.Users.CreateOrUpdateTest do
 
       response = CreateOrUpdate.call(params)
 
-      expected_response = {:ok, "User with cpf 12312312312 created or updated successfully"}
-
-      assert response == expected_response
+      assert {:ok, _uuid} = response
     end
 
     test "when there are invalid params, returns an error" do

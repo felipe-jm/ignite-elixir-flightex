@@ -11,18 +11,8 @@ defmodule Flightex.Bookings.CreateOrUpdate do
     data_completa
     |> format_date()
     |> Booking.build(cidade_origem, cidade_destino, id_usuario)
-    |> save_booking
+    |> BookingAgent.save()
   end
-
-  defp save_booking({:ok, %Booking{} = booking}) do
-    uuid = UUID.uuid4()
-
-    BookingAgent.save(booking, uuid)
-
-    {:ok, uuid}
-  end
-
-  defp save_booking({:error, _reason} = error), do: error
 
   defp format_date(date) do
     case NaiveDateTime.from_iso8601(date) do

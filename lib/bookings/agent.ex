@@ -7,7 +7,9 @@ defmodule Flightex.Bookings.Agent do
     Agent.start_link(fn -> %{} end, name: __MODULE__)
   end
 
-  def save(%Booking{} = booking, uuid) do
+  def save(%Booking{} = booking) do
+    uuid = UUID.uuid4()
+
     Agent.update(__MODULE__, &update_state(&1, booking, uuid))
 
     {:ok, uuid}

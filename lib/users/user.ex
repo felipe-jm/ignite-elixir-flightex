@@ -1,6 +1,6 @@
 defmodule Flightex.Users.User do
   @keys [:cpf, :email, :name]
-  @enforce_keys @keys
+  @enforce_keys [:cpf, :email, :name]
 
   defstruct @keys
 

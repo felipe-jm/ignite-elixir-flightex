@@ -12,7 +12,7 @@ defmodule Flightex.Users.AgentTest do
 
       user = build(:user)
 
-      assert UserAgent.save(user) == :ok
+      assert {:ok, _uuid} = UserAgent.save(user)
     end
   end
 
@@ -24,19 +24,14 @@ defmodule Flightex.Users.AgentTest do
     end
 
     test "when the user is found, returns the user" do
-      :user
-      |> build(cpf: "12312312312")
-      |> UserAgent.save()
+      user = build(:user)
 
-      response = UserAgent.get("12312312312")
+      {:ok, uuid} = UserAgent.save(user)
+
+      response = UserAgent.get(uuid)
 
       expected_response =
-        {:ok,
-         %User{
-           cpf: "12312312312",
-           email: "felipe@gmail.com",
-           name: "Felipe"
-         }}
+        {:ok, %User{cpf: "12312312312", email: "felipe@gmail.com", name: "Felipe"}}
 
       assert response == expected_response
     end
